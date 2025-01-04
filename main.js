@@ -83,6 +83,48 @@ search.addEventListener('click', () => {
             description.innerHTML = `${json.weather[0].description}`;
             humidity.innerHTML = `${json.main.humidity}%`;
             wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
+
+            const infoWeather = document.querySelector('.info-weather');
+            const infoHumidity = document.querySelector('.info-humidity');
+            const infoWind = document.querySelector('.info-wind');
+
+            const elCloneInfoWeather = infoWeather.cloneNode(true);
+            const elCloneInfoHumedity = infoHumidity.cloneNode(true);
+            const elCloneInfoWind = infoWind.cloneNode(true);
+
+            elCloneInfoWeather.id = 'clone-info-weather';
+            elCloneInfoWeather.classList.add('active-clone');
+            elCloneInfoHumedity.id = 'clone-info-humidity';
+            elCloneInfoHumedity.classList.add('active-clone');
+            elCloneInfoWind.id = 'clone-info-wind';
+            elCloneInfoWind.classList.add('active-clone');
+
+            setTimeout(() => {
+                infoWeather.insertAdjacentElement("afterend", elCloneInfoWeather);
+                infoHumidity.insertAdjacentElement("afterend", elCloneInfoHumedity);
+                infoWind.insertAdjacentElement("afterend", elCloneInfoWind);
+            }, 2200);
+
+            const cloneInfoWeather = document.querySelectorAll('.info-weather.active-clone');
+            const totalCloneInfoWeather = cloneInfoWeather.length;
+            const cloneInfoWeatherFirst = cloneInfoWeather[0];
+            const cloneInfoHumidity = document.querySelectorAll('.info-humidity.active-clone');
+            const cloneInfoHumidityFirst = cloneInfoHumidity[0];
+            const cloneInfoWind = document.querySelectorAll('.info-wind.active-clone');
+            const cloneInfoWindFirst = cloneInfoWind[0];
+
+            if (totalCloneInfoWeather > 0) {
+                cloneInfoWeatherFirst.classList.remove('active-clone');
+                cloneInfoHumidityFirst.classList.remove('active-clone');
+                cloneInfoWindFirst.classList.remove('active-clone');
+
+                setTimeout(() => {
+                    cloneInfoWeatherFirst.remove();
+                    cloneInfoHumidityFirst.remove();
+                    cloneInfoWindFirst.remove();
+                }, 2200);
+            }
+
         };
 
     });
